@@ -7,7 +7,7 @@ remain hard coded, but they are pretty obvious.
 The purpose this bot was created for is to repost new /r/gonwild submissions to a
 subreddit that is not flagged NSFW, and to remove the square brackets from post title
 (which is supposed to be jokingly referring to the practices of the well-known porn
-subreddit which has a similar name. The /r/gonwild subreddit was created as a parody
+subreddit which has a similar name). The /r/gonwild subreddit was created as a parody
 of the similarly named porn subreddit, but only posts geometrical animations.
 
 ## Features
