@@ -36,23 +36,23 @@ The bot requires a configuration file called praw.ini, containing the following:
 
 ### General script help:
 
-usage: rpgonbot.py [-h] [-c <praw.ini>] [-b <rpgonbot>] {run,test,show} ...
+    usage: rpgonbot.py [-h] [-c <praw.ini>] [-b <rpgonbot>] {run,test,show} ...
 
-Reddit repost bot
+    Reddit repost bot
 
-positional arguments:
-  {run,test,show}
-    run                 Run the bot and repost new posts
-    test                Various testing fuctions
-    show                Bot information
+    positional arguments:
+      {run,test,show}
+        run                 Run the bot and repost new posts
+        test                Various testing fuctions
+        show                Bot information
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -c <praw.ini>, --config <praw.ini>
-                        Name of config file to load
-  -b <rpgonbot>, --bot <rpgonbot>
-                        Name of bot (used in config file, and user agent, and
-                        other places)
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c <praw.ini>, --config <praw.ini>
+                            Name of config file to load
+      -b <rpgonbot>, --bot <rpgonbot>
+                            Name of bot (used in config file, and user agent, and
+                            other places)
 
 ### Run command help:
 
