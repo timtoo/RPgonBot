@@ -165,6 +165,7 @@ class RPGonBot(object):
 
 
     def crosspost(self, post, flair=None):
+        """Create the crosspost from the provided submission; also add comment with link back."""
         title = self.clean_title(post.title)
 
         try:
@@ -211,9 +212,11 @@ ______
             print_all_fields(post)
             raise
 
+        debug("Crossposted: <{}> {}".format(post.id, title))
         return submission
 
     def db_create_rp_data(self):
+        """create the rows to store the last timestamp and id crossposted"""
         debug("Creating rp_data for sub", self.source)
         self.db.execute("INSERT INTO rp_data VALUES (?, 'last_created_utc', 0);", (self.source,))
         self.db.execute("INSERT INTO rp_data VALUES (?, 'last_post_id', NULL);", (self.source,))
@@ -221,6 +224,7 @@ ______
         self.db.commit()
 
     def db_reset_rp_data(self, reddit_id):
+        """find the timestamp of a submission and use it to reset the database to"""
         submission = next(reddit.submission(reddit_id))
         if submission:
             self.db.execute("""UPDATE rp_data SET value=? WHERE
@@ -232,6 +236,9 @@ ______
             self.db.commit()
 
     def db_fetch_rp_data(self, subreddit, key):
+        """Fetch value from the table that records various "last submission" data.
+        And do some data casting in one case.
+        """
         result = self.db.execute("""SELECT value FROM rp_data
                 WHERE subreddit=? AND key=?""", (subreddit,key)).fetchone()
         if result:
@@ -242,6 +249,11 @@ ______
         return result
 
     def check_for_posts(self):
+        """Check for new posts in the source subreddit, and crosspost any found.
+
+        Was going to update local database with old submission comment and score numbers,
+        but then didn't.
+        """
         submissions = self.subreddit_source.new(limit=source_limit)
         new_posts = []
 
@@ -254,12 +266,12 @@ ______
 
         # go through posts and find new ones
         for s in submissions:
+            desc = "[{} - {}]: {} ({})".format(
+                    s.id,
+                    datetime.datetime.utcfromtimestamp(int(s.created_utc)),
+                    s.title,
+                    s.score)
             if int(s.created_utc) >= last_created_utc:
-                desc = "[{} - {}]: {} ({})".format(
-                        s.id,
-                        datetime.datetime.utcfromtimestamp(int(s.created_utc)),
-                        s.title,
-                        s.score)
                 if s.score > 0:
                     if not s.is_self:
                         new_posts.insert(0,s)
