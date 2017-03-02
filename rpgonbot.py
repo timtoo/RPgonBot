@@ -336,7 +336,7 @@ ______
             print("No log entries found")
 
     def show_posts(self, subreddit_object):
-        print("{} most recent posts in /r/{}:".format(source_limit, self.source))
+        print("{} most recent posts in /r/{}:".format(source_limit, subreddit_object.display_name))
         submissions = subreddit_object.new(limit=source_limit)
 
         format = "{count:02}.[{timestamp}] <{id}> {title} - {domain} ({ups}^)"
