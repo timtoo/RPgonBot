@@ -19,6 +19,11 @@ of the similarly named porn subreddit, but only posts geometrical animations.
 - a comment is added to every crosspost pointing to the original post
 - single script file
 
+## Notes:
+
+- to use flairs user link flairs must be enabled in the subreddit settings
+- to use the hard coded flair, the "x-post" flair created in the subreddit link flair templates
+
 ## praw.ini
 
 The bot requires a configuration file called praw.ini, containing the following:
@@ -28,9 +33,9 @@ The bot requires a configuration file called praw.ini, containing the following:
     client_secret=<reddit api secret>
     password=<password of reddit bot user>
     username=<reddit username of bot>
-    owner=ragica
-    source=gonwild
-    destination=geomation
+    owner=<your reddit username>
+    source=<name of source reddit>
+    destination=<name of destination reddit>
     source_limit=10
     debug=1
 

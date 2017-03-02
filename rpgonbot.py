@@ -271,6 +271,8 @@ ______
                     datetime.datetime.utcfromtimestamp(int(s.created_utc)),
                     s.title,
                     s.score)
+            # the equals is included in the wierd chance two things have same timestamp
+            # dupliate is still rejected later
             if int(s.created_utc) >= last_created_utc:
                 if s.score > 0:
                     if not s.is_self:
@@ -286,6 +288,8 @@ ______
         for np in new_posts:
             if np.id != last_post_id:
                 self.crosspost(np)
+            else:
+                debug("Ignoring (most recently crossposted): " + last_postid)
 
     def show_database(self):
         print("Bot name: {} (database: {})".format(args.bot, dbfn))
