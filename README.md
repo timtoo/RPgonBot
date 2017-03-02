@@ -66,7 +66,7 @@ The bot requires a configuration file called praw.ini, containing the following:
 ### Show command help:
 
     usage: rpgonbot.py show [-h] [--all] [--database] [--log [count]]
-                            [--reposts [count]] [--source-posts]
+                            [--reposts [count]] [--posts]
 
     optional arguments:
       -h, --help         show this help message and exit
@@ -74,7 +74,8 @@ The bot requires a configuration file called praw.ini, containing the following:
       --database         Show info about database
       --log [count]      Show latest # log entries
       --reposts [count]  Show latest # reposts logged
-      --source-posts     Show latest posts in source subreddit
+      --posts            Show latest posts online in source & destination
+                         subreddits
 
 ### Test command help:
 

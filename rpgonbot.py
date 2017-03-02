@@ -335,6 +335,25 @@ ______
         if rows == 0:
             print("No log entries found")
 
+    def show_posts(self, subreddit_object):
+        print("{} most recent posts in /r/{}:".format(source_limit, self.source))
+        submissions = subreddit_object.new(limit=source_limit)
+
+        format = "{count:02}.[{timestamp}] <{id}> {title} - {domain} ({ups}^)"
+
+        count = 1
+        for s in submissions:
+            print(format.format(
+                    count = count,
+                    timestamp = datetime.datetime.utcfromtimestamp(int(s.created_utc)),
+                    id = s.id,
+                    title = s.title,
+                    domain = s.domain,
+                    ups = s.ups
+                    ))
+            count += 1
+
+
 parser = argparse.ArgumentParser(description='Reddit repost bot')
 subparsers = parser.add_subparsers(dest="command")
 subparser_run = subparsers.add_parser('run', help="Run the bot and repost new posts")
@@ -357,7 +376,7 @@ subparser_show.add_argument('--all', action="store_true", help="Show all (or mos
 subparser_show.add_argument('--database', action="store_true", help="Show info about database")
 subparser_show.add_argument('--log', type=int, default=0, metavar="[count]", help="Show latest # log entries")
 subparser_show.add_argument('--reposts', type=int, default=0, metavar="[count]", help="Show latest # reposts logged")
-subparser_show.add_argument('--source-posts', action="store_true", help="Show latest posts in source subreddit")
+subparser_show.add_argument('--posts', action="store_true", help="Show latest posts online in source & destination subreddits")
 
 subparser_run.add_argument('--reset', type=str, help="Reset the last repost date to the given reddit submission ID (eg. 5wxv94)")
 
@@ -393,6 +412,12 @@ if args.command == 'show':
 
     if args.log > 0:
         bot.show_log(args.log)
+        print()
+
+    if args.posts > 0:
+        bot.show_posts(bot.subreddit_source)
+        print()
+        bot.show_posts(bot.subreddit_destination)
         print()
 
 if args.command == 'test':
