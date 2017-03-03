@@ -289,7 +289,7 @@ ______
             if np.id != last_post_id:
                 self.crosspost(np)
             else:
-                debug("Ignoring (most recently crossposted): " + last_postid)
+                debug("Ignoring (most recently crossposted): " + last_post_id)
 
     def show_database(self):
         print("Bot name: {} (database: {})".format(args.bot, dbfn))
