@@ -265,8 +265,9 @@ ______
         last_post_id = self.db_fetch_rp_data(self.source,'last_post_id')
 
         # go through posts and find new ones
+        desc_format = "[{} - {}]: {} ({})"
         for s in submissions:
-            desc = "[{} - {}]: {} ({})".format(
+            desc = desc_format.format(
                     s.id,
                     datetime.datetime.utcfromtimestamp(int(s.created_utc)),
                     s.title,
@@ -282,14 +283,16 @@ ______
                 else:
                     self.dblog(2, "Ignoring (low score): " + desc)
             else:
-                debug("Ignoring (older Post): " + desc)
+                debug("Ignoring (older post): " + desc)
 
         # list of new posts in ascending chronological order
         for np in new_posts:
             if np.id != last_post_id:
                 self.crosspost(np)
             else:
-                debug("Ignoring (most recently crossposted): " + last_post_id)
+                debug("Ignoring (last xpost): " + desc_format.format(last_post_id,
+                        datetime.datetime.utcfromtimestamp(int(np.created_utc)),
+                        np.title, np.score))
 
     def show_database(self):
         print("Bot name: {} (database: {})".format(args.bot, dbfn))
