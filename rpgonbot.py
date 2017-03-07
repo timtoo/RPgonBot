@@ -35,7 +35,18 @@ def print_all_fields(o):
 
 class RPGonBot(object):
 
-    re_title_char_strip = re.compile(r"[][{}]")
+    re_title_char_strip = re.compile(r"[][(){}]")
+
+    silly_thesaurus = {
+        'curve': 'arc',
+        'hole': 'empty space',
+        'leg': 'appendage',
+        'i love': 'it\'s nice',
+        'pole': 'line',
+        'curvy': 'wavy',
+        'you': 'some things',
+        'arm': 'limb',
+    }
 
     def __init__(self, source, destination):
         self._db = None
@@ -161,8 +172,45 @@ class RPGonBot(object):
 
     def clean_title(self, text):
         """Clean up the gonwild title"""
-        return self.re_title_char_strip.sub('', text)
+        return self.hack_title(self.re_title_char_strip.sub('', text))
 
+    def hack_title(self, text):
+        count = 0
+        index = 0
+        for k, v in self.silly_thesaurus.items():
+            r = re.compile(r"\b({})(s?)\b".format(k), re.I)
+            while True:
+                count += 1
+                if count>999:
+                    break
+                m = r.search(text, index)
+                if not m:
+                    break
+
+                word = text[m.start(1):m.end(1)]
+                replacement = self.text_replacement(word) + text[m.start(2):m.end(2)]
+                if replacement:
+                    text = text[:m.start(0)] + replacement + text[m.end(0):]
+                    index = m.start(0) + len(replacement)
+                else:
+                    index += 1
+
+        return text
+
+    def text_replacement(self, word):
+        """Find matching thesaurus item, and try to match case, etc"""
+        result = self.silly_thesaurus.get(word.lower(), '')
+        if result:
+            if word == word.lower():
+                pass
+            elif word == word.upper():
+                result = result.upper()
+            elif word == word.capitalize():
+                result = result.capitalize()
+            elif word == word[:1].upper() + word[1:]:
+                result = result[:1].upper() + result[1:]
+
+        return result
 
     def crosspost(self, post, flair=None):
         """Create the crosspost from the provided submission; also add comment with link back."""
@@ -175,7 +223,6 @@ class RPGonBot(object):
             self.dblog(1, "{} : {} : {}".format(post.id, post.title, e))
             debug(str(e), post.title)
             return None
-
 
         flair_id = self.get_flair_id('x-post', submission=submission)
         submission.flair.select(flair_id)
