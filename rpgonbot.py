@@ -215,6 +215,7 @@ class RPGonBot(object):
     def crosspost(self, post, flair=None):
         """Create the crosspost from the provided submission; also add comment with link back."""
         title = self.clean_title(post.title)
+        title = title + " - [via: " + post.author.name + "]"
 
         try:
             submission = self.subreddit_destination.submit(title,
