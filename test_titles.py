@@ -20,6 +20,8 @@ titles = (
     'Deeper and [d]eeper',
     'Perfectly [p]roportioned curves',
     'Honeycomb [h]ole',
+    'Check out [m]y hole (x-post from r/loadingicon)',
+    'Twist and turn. [x-post /r/oddlysatisfying]',
 )
 
 bot = rpgonbot.RPGonBot('d', 't')

@@ -14,7 +14,7 @@ import argparse
 import praw
 
 DEFAULT_BOT_NAME='rpgonbot'
-__version__ = '0.2'
+__version__ = '0.3'
 
 def debug(*s):
     if DEBUG:
@@ -35,7 +35,7 @@ def print_all_fields(o):
 
 class RPGonBot(object):
 
-    re_title_char_strip = re.compile(r"[][(){}]")
+    re_title_brackets = re.compile(r"[[({]([^\s]*)[])}]")
 
     silly_thesaurus = {
         'curve': 'arc',
@@ -172,7 +172,7 @@ class RPGonBot(object):
 
     def clean_title(self, text):
         """Clean up the gonwild title"""
-        return self.hack_title(self.re_title_char_strip.sub('', text))
+        return self.hack_title(self.re_title_brackets.sub(r'\1', text))
 
     def hack_title(self, text):
         count = 0
