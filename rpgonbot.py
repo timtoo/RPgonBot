@@ -46,6 +46,9 @@ class RPGonBot(object):
         'curvy': 'wavy',
         'you': 'some things',
         'arm': 'limb',
+        'pump': 'pulse',
+        'pumping': 'pulsing',
+        'hard': 'solid',
     }
 
     def __init__(self, source, destination):
