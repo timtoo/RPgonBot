@@ -49,6 +49,8 @@ class RPGonBot(object):
         'pump': 'pulse',
         'pumping': 'pulsing',
         'hard': 'solid',
+        'frisky': 'whimsical',
+        'into me': 'into something',
     }
 
     def __init__(self, source, destination):

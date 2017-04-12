@@ -23,6 +23,8 @@ titles = (
     'Check out [m]y hole (x-post from r/loadingicon)',
     'Twist and turn. [x-post /r/oddlysatisfying]',
     'pumping [h]ard',
+    'feeling frisky tonight',
+    'epiMorph into me',
 )
 
 bot = rpgonbot.RPGonBot('d', 't')
