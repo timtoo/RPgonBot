@@ -51,7 +51,7 @@ titles = (
     ('Stick it in me [MMF]',
         'Stick it in object'),
     ('[F]irst post, be gentle. [OC]',
-        'Hello, such good. OC'),
+        'Hello, such good. [OC]'),
 )
 
 bot = rpgonbot.RPGonBot('d', 't')
@@ -64,7 +64,7 @@ for title in titles:
     print ("ORIGINAL: " + repr(original))
     print ("HACKED:   " + repr(hacked))
     if hacked != title[1]:
-        errors.push(title)
+        errors.append(title)
         print ("!!ERROR!! " + repr(title[1]))
 
     if errors:

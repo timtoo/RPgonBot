@@ -35,7 +35,8 @@ def print_all_fields(o):
 
 class RPGonBot(object):
 
-    re_title_brackets = re.compile(r"[[({]([^\s]*)[])}]")
+    # look for any type of brackets with all non-whitespace and not "OC" between them.
+    re_title_brackets = re.compile(r"[[({](?!OC)([^\s]*)[])}]")
 
     silly_thesaurus = {
         'curve': 'arc',
