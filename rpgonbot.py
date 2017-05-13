@@ -51,6 +51,12 @@ class RPGonBot(object):
         'hard': 'solid',
         'frisky': 'whimsical',
         'into me': 'into something',
+        'in me': 'in object',
+        'stick it': 'geometry',
+        'mmf': '',
+        'ffm': '',
+        'first post': 'hello',
+        'be gentle': 'such good',
     }
 
     def __init__(self, source, destination):
@@ -182,6 +188,7 @@ class RPGonBot(object):
     def hack_title(self, text):
         count = 0
         index = 0
+        #print ('--', text)
         for k, v in self.silly_thesaurus.items():
             r = re.compile(r"\b({})(s?)\b".format(k), re.I)
             while True:
@@ -193,14 +200,12 @@ class RPGonBot(object):
                     break
 
                 word = text[m.start(1):m.end(1)]
+                #print(m, word)
                 replacement = self.text_replacement(word) + text[m.start(2):m.end(2)]
-                if replacement:
-                    text = text[:m.start(0)] + replacement + text[m.end(0):]
-                    index = m.start(0) + len(replacement)
-                else:
-                    index += 1
+                text = text[:m.start(0)] + replacement + text[m.end(0):]
+                index = m.start(0) + (len(replacement) or 1)
 
-        return text
+        return text.strip()
 
     def text_replacement(self, word):
         """Find matching thesaurus item, and try to match case, etc"""
