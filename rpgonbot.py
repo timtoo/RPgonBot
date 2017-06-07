@@ -21,7 +21,7 @@ def debug(*s):
         if len(s)>1:
             print(datetime.datetime.now(), repr(s))
         else:
-            print(datetime.datetime.now(), s[0])
+            print(datetime.datetime.now(), s[0].encode('utf-8'))
 
 
 def print_all_fields(o):
