@@ -38,6 +38,7 @@ The bot requires a configuration file called praw.ini, containing the following:
     destination=<name of destination reddit>
     source_limit=10
     debug=1
+    check_for_updates=False
 
 ### General script help:
 
