@@ -58,6 +58,11 @@ class RPGonBot(object):
         'ffm': '',
         'first post': 'hello',
         'be gentle': 'such good',
+        'baby': 'infant',
+        'push': 'apply effort to',
+        'deeper': 'more subsantially',
+        'spread': 'distribute',
+        'pleasure': 'good feeling',
     }
 
     def __init__(self, source, destination):
