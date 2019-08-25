@@ -97,4 +97,4 @@ The bot requires a configuration file called praw.ini, containing the following:
                             repost, if post-id not specified)
       --post-id ID          Submission ID to use with tests if needed
 
-
+*imported from bitbucket mercurial repo https://timtoo@bitbucket.org/timtoo/rpgonbot*
