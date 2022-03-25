@@ -23,6 +23,7 @@ of the similarly named porn subreddit, but only posts geometrical animations.
 
 - to use flairs user link flairs must be enabled in the subreddit settings
 - to use the hard coded flair, the "x-post" flair created in the subreddit link flair templates
+- still working, 4 years later, on python 3.9.2!
 
 ## praw.ini
 
